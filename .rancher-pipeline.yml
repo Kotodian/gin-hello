@@ -1,11 +1,11 @@
 stages:
   - name: Build hello-world
-    when:
-      branch: main
-      event: [ push, pull_request ]
+#    when:
+#      branch: main
+#      event: [ push, pull_request ]
     steps:
       - runScriptConfig:
-          image:  golang:1.16
+          image: golang:1.16
           shellScript:  |-
             go build -o gin-hello
   - name: Publish
@@ -13,7 +13,7 @@ stages:
       - publishImageConfig:
           dockerfilePath: ./Dockerfile
           buildContext: .
-          tag: gin-Hello:${CICD_EXECUTION_SEQUENCE}
+          tag: gin-hello:${CICD_EXECUTION_SEQUENCE}
   - name: Deploy
     steps:
       - applyYamlConfig:
