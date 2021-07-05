@@ -4,7 +4,7 @@ metadata:
   name: gin-hello-service
 spec:
   selector:
-    app:  gin-Hello
+    app:  gin-hello
   types:  NodePort
   ports:
     - protocol: TCP
