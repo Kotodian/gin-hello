@@ -19,7 +19,6 @@ stages:
       buildContext: .
       tag: gin-hello:${CICD_EXECUTION_SEQUENCE}
       pushRemote: true
-      registry: 127.0.0.1:34633
 - name: Deploy
   steps:
   - applyYamlConfig:
