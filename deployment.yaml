@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: gin-Hello-service
+  name: gin-hello-service
 spec:
   selector:
     app:  gin-Hello
@@ -14,23 +14,23 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gin-Hello
+  name: gin-hello
   labels:
-    app:  gin-Hello
+    app:  gin-hello
   spec:
     replicas: 1
     selector:
       matchLabels:
-        app: gin-Hello
+        app: gin-hello
     template:
       metadata:
         labels:
-          app: gin-Hello
+          app: gin-hello
       spec:
 #        imagePullSecrets:
 #          - name: pipeline-docker-registry
         containers:
-          - name: gin-Hello
+          - name: gin-hello
             image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
             ports:
               - containerPort: 9091

@@ -7,7 +7,7 @@ stages:
       - runScriptConfig:
           image:  golang:1.16
           shellScript:  |-
-            go build -o gin-Hello
+            go build -o gin-hello
   - name: Publish
     steps:
       - publishImageConfig:
