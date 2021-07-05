@@ -1,0 +1,36 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: gin-Hello-service
+spec:
+  selector:
+    app:  gin-Hello
+  types:  NodePort
+  ports:
+    - protocol: TCP
+      port: 9091
+      targetPort: 9091
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gin-Hello
+  labels:
+    app:  gin-Hello
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: gin-Hello
+    template:
+      metadata:
+        labels:
+          app: gin-Hello
+      spec:
+#        imagePullSecrets:
+#          - name: pipeline-docker-registry
+        containers:
+          - name: gin-Hello
+            image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+            ports:
+              - containerPort: 9091
