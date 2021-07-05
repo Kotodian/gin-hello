@@ -10,5 +10,8 @@ func main() {
 	engine.GET("/hello", func(context *gin.Context) {
 		fmt.Println("Hello World!")
 	})
+	engine.POST("/hello", func(context *gin.Context) {
+		fmt.Println("Hello World!2")
+	})
 	engine.Run(":9091")
 }
