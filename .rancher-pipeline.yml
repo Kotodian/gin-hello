@@ -1,20 +1,27 @@
 stages:
-  - name: Build hello-world
-    when:
-      branch: main
-      event: [ push, pull_request ]
-    steps:
-      - runScriptConfig:
-          image: golang:1.16
-          shellScript:  |-
-            go build -o gin-hello
-  - name: Publish
-    steps:
-      - publishImageConfig:
-          dockerfilePath: ./Dockerfile
-          buildContext: .
-          tag: gin-hello:${CICD_EXECUTION_SEQUENCE}
-  - name: Deploy
-    steps:
-      - applyYamlConfig:
-          path: ./deployment.yaml
+- name: Build hello-world
+  steps:
+  - runScriptConfig:
+      image: golang:latest
+      shellScript: go build -o gin-hello
+  when:
+    branch:
+      include:
+      - main
+    event:
+      include:
+      - push
+      - pull_request
+- name: Publish
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: gin-hello:${CICD_EXECUTION_SEQUENCE}
+      pushRemote: true
+      registry: 127.0.0.1:34633
+- name: Deploy
+  steps:
+  - applyYamlConfig:
+      path: ./deployment.yaml
+notification: {}
