@@ -1,8 +1,8 @@
 stages:
   - name: Build hello-world
-#    when:
-#      branch: main
-#      event: [ push, pull_request ]
+    when:
+      branch: main
+      event: [ push, pull_request ]
     steps:
       - runScriptConfig:
           image: golang:1.16
